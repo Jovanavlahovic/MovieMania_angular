@@ -1,0 +1,46 @@
+<form [formGroup]="formValidator" (submit)="onSubmit()" class="form mt-2">
+    <label for="name" style="width: 10%;">Name:</label>
+    <input type="text" name="name" id="name" style="width: 45%;" formControlName="name">
+    <span *ngIf="formValidator.controls.name.touched">
+        <small *ngIf="formValidator.controls.name.errors?.required">This field cannot be empthy</small>
+    </span>
+    <br>
+     <label for="description" style="width: 10%;">Description:</label>
+    <textarea name="desription" id="description" cols="30" rows="5" style="width: 45%;"  formControlName="description"></textarea>
+     <span *ngIf="formValidator.controls.description.touched">
+        <small *ngIf="formValidator.controls.description.errors?.required">This field cannot be empthy</small>
+        <small *ngIf="!formValidator.controls.description.errors?.required && formValidator.controls.description.errors?.minlength">This field must have at least 30 characters</small>
+        <small *ngIf="!formValidator.controls.description.errors?.required && !formValidator.controls.description.errors?.maxength && formValidator.controls.description.errors?.maxength">This field must have max 230 characters</small>
+    </span>
+    <br>
+    <label for="year" style="width: 10%;">Year:</label>
+    <input type="number" name="year" id="year" style="width: 45%;"  formControlName="year">
+    <span *ngIf="formValidator.controls.year.touched">
+        <small *ngIf="formValidator.controls.year.errors?.required">This field cannot be empthy</small>
+        <small *ngIf="!formValidator.controls.year.errors?.required && formValidator.controls.year.errors?.min">This field must have 4 numbers</small>
+    </span>
+    <br>
+    <label for="rating" style="width: 10%;">Rating:</label>
+    <input type="text" name="rating" id="rating" style="width: 45%;"  formControlName="rating">
+    <br>
+    <label for="duration" style="width: 10%;">Duration:</label>
+    <input type="text" name="duration" id="duration" style="width: 45%;"  formControlName="duration">
+    <br>
+    <label for="director" style="width: 10%;">Director:</label>
+    <input type="text" name="director"  id="director" style="width: 45%;"  formControlName="director">
+    <br>
+    <label for="genre"  style="width: 10%;">Genre:</label>
+    <select name="genre" id="genre"  style="width: 45%;" formControlName="genre">
+        <option *ngFor="let genre of genres" value="{{genre?.name}}" [selected]="genre.name == newGenre?.name">{{genre.name.slice(0,1).toUpperCase()+genre.name.slice(1)}}</option>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary" [disabled]="formValidator.invalid" >Submit</button>
+    <br>
+</form>
+<button type="menu" class="btn btn-primary" (click)="showGenreForm()">+</button>
+<div *ngIf="showMore">
+        <label for="newGenre" style="width: 10%;">Enter new Genre:</label>
+        <input type="text" name="newGenre" id="newGenre" style="width: 45%;" [(ngModel)]="newGenre.name">
+        <button class="btn btn-primary" (click)="addGenre()">Add new Genre</button>
+    </div>
+

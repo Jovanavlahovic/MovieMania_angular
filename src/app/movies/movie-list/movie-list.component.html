@@ -1,0 +1,7 @@
+<div class="bg-light mt-2 clearfix p-2" *ngFor="let movie of movies" [routerLink]="['add', movie?._id]">
+    <span class="text-primary mr-2 h5">{{movie?.name}}</span>
+    <span class="h5">{{movie?.year}}</span>
+    <p class="text-justify">{{movie?.description}}</p>
+    <span class="float-left"><img src="assets/images/gold_star.png" alt="rating"> {{movie?.rating}}</span>
+    <span class="float-right">{{movie?.duration}} mins.</span>
+</div>
